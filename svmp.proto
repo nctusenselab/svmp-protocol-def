@@ -108,6 +108,8 @@ message Intent {
 
   //Correspond to optional Intent parameters
   optional string data = 3;
+  optional string type = 6;
+  optional File file = 7;
   repeated int32 flags = 4;
   repeated string categories = 5;
 
@@ -115,6 +117,12 @@ message Intent {
   message Tuple {
     required string key = 1;
     required string value = 2;
+  }
+
+  // file forwarding
+  message File {
+    required string filename = 1;
+    optional bytes data = 2;
   }
 }
 
