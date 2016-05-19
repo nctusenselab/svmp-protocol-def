@@ -37,6 +37,7 @@ message Request
     APPS          = 10; // client request for available apps on the VM
     KEYEVENT      = 11;
     CONFIG        = 12;
+    FILE_REQUEST  = 13; // File sync back request
   }
 
   // repeated to allow batching multiple events in a single message
@@ -54,6 +55,8 @@ message Request
   optional AppsRequest apps = 14;
   optional KeyEvent key = 15;
   optional Config config = 16;
+
+  optional FileRequest fileRequest = 17;
 }
 
 // Server to client message wrapper
@@ -71,6 +74,7 @@ message Response
     WEBRTC        = 7; // WebRTC signalling message
     PING          = 8; // response to client ping measurement (ms)
     APPS          = 9; // response to client request for available apps
+    FILE          = 10;
   }
 
   required ResponseType type = 1;
@@ -86,6 +90,8 @@ message Response
   optional ScreenInfo screenInfo = 16;
   optional VideoStreamInfo videoInfo = 17;
   optional WebRTCMessage webrtcMsg = 18;
+
+  optional File file = 19;
 }
 
 //=====================================================================
@@ -118,12 +124,16 @@ message Intent {
     required string key = 1;
     required string value = 2;
   }
+}
 
-  // file forwarding
-  message File {
-    required string filename = 1;
-    optional bytes data = 2;
-  }
+message File {
+  required string filename = 1;
+  optional bytes data = 2;
+  optional string targetPath = 3;
+}
+
+message FileRequest {
+  required string filename = 1;
 }
 
 // C<->S

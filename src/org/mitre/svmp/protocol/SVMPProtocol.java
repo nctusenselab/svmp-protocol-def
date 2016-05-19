@@ -390,6 +390,16 @@ public final class SVMPProtocol {
      * <code>optional .svmp.Config config = 16;</code>
      */
     org.mitre.svmp.protocol.SVMPProtocol.Config getConfig();
+
+    // optional .svmp.FileRequest fileRequest = 17;
+    /**
+     * <code>optional .svmp.FileRequest fileRequest = 17;</code>
+     */
+    boolean hasFileRequest();
+    /**
+     * <code>optional .svmp.FileRequest fileRequest = 17;</code>
+     */
+    org.mitre.svmp.protocol.SVMPProtocol.FileRequest getFileRequest();
   }
   /**
    * Protobuf type {@code svmp.Request}
@@ -585,6 +595,19 @@ public final class SVMPProtocol {
               bitField0_ |= 0x00000400;
               break;
             }
+            case 138: {
+              org.mitre.svmp.protocol.SVMPProtocol.FileRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000800) == 0x00000800)) {
+                subBuilder = fileRequest_.toBuilder();
+              }
+              fileRequest_ = input.readMessage(org.mitre.svmp.protocol.SVMPProtocol.FileRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(fileRequest_);
+                fileRequest_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000800;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -682,6 +705,14 @@ public final class SVMPProtocol {
        * <code>CONFIG = 12;</code>
        */
       CONFIG(12, 12),
+      /**
+       * <code>FILE_REQUEST = 13;</code>
+       *
+       * <pre>
+       * File sync back request
+       * </pre>
+       */
+      FILE_REQUEST(13, 13),
       ;
 
       /**
@@ -744,6 +775,14 @@ public final class SVMPProtocol {
        * <code>CONFIG = 12;</code>
        */
       public static final int CONFIG_VALUE = 12;
+      /**
+       * <code>FILE_REQUEST = 13;</code>
+       *
+       * <pre>
+       * File sync back request
+       * </pre>
+       */
+      public static final int FILE_REQUEST_VALUE = 13;
 
 
       public final int getNumber() { return value; }
@@ -763,6 +802,7 @@ public final class SVMPProtocol {
           case 10: return APPS;
           case 11: return KEYEVENT;
           case 12: return CONFIG;
+          case 13: return FILE_REQUEST;
           default: return null;
         }
       }
@@ -1092,6 +1132,22 @@ public final class SVMPProtocol {
       return config_;
     }
 
+    // optional .svmp.FileRequest fileRequest = 17;
+    public static final int FILEREQUEST_FIELD_NUMBER = 17;
+    private org.mitre.svmp.protocol.SVMPProtocol.FileRequest fileRequest_;
+    /**
+     * <code>optional .svmp.FileRequest fileRequest = 17;</code>
+     */
+    public boolean hasFileRequest() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    /**
+     * <code>optional .svmp.FileRequest fileRequest = 17;</code>
+     */
+    public org.mitre.svmp.protocol.SVMPProtocol.FileRequest getFileRequest() {
+      return fileRequest_;
+    }
+
     private void initFields() {
       type_ = org.mitre.svmp.protocol.SVMPProtocol.Request.RequestType.VIDEO_PARAMS;
       touch_ = java.util.Collections.emptyList();
@@ -1106,6 +1162,7 @@ public final class SVMPProtocol {
       apps_ = org.mitre.svmp.protocol.SVMPProtocol.AppsRequest.getDefaultInstance();
       key_ = org.mitre.svmp.protocol.SVMPProtocol.KeyEvent.getDefaultInstance();
       config_ = org.mitre.svmp.protocol.SVMPProtocol.Config.getDefaultInstance();
+      fileRequest_ = org.mitre.svmp.protocol.SVMPProtocol.FileRequest.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1164,6 +1221,12 @@ public final class SVMPProtocol {
           return false;
         }
       }
+      if (hasFileRequest()) {
+        if (!getFileRequest().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -1209,6 +1272,9 @@ public final class SVMPProtocol {
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         output.writeMessage(16, config_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeMessage(17, fileRequest_);
       }
     }
 
@@ -1269,6 +1335,10 @@ public final class SVMPProtocol {
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(16, config_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(17, fileRequest_);
       }
       memoizedSerializedSize = size;
       return size;
@@ -1391,6 +1461,8 @@ public final class SVMPProtocol {
         bitField0_ = (bitField0_ & ~0x00000800);
         config_ = org.mitre.svmp.protocol.SVMPProtocol.Config.getDefaultInstance();
         bitField0_ = (bitField0_ & ~0x00001000);
+        fileRequest_ = org.mitre.svmp.protocol.SVMPProtocol.FileRequest.getDefaultInstance();
+        bitField0_ = (bitField0_ & ~0x00002000);
         return this;
       }
 
@@ -1468,6 +1540,10 @@ public final class SVMPProtocol {
           to_bitField0_ |= 0x00000400;
         }
         result.config_ = config_;
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        result.fileRequest_ = fileRequest_;
         result.bitField0_ = to_bitField0_;
         return result;
       }
@@ -1529,6 +1605,9 @@ public final class SVMPProtocol {
         if (other.hasConfig()) {
           mergeConfig(other.getConfig());
         }
+        if (other.hasFileRequest()) {
+          mergeFileRequest(other.getFileRequest());
+        }
         return this;
       }
 
@@ -1581,6 +1660,12 @@ public final class SVMPProtocol {
         }
         if (hasKey()) {
           if (!getKey().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasFileRequest()) {
+          if (!getFileRequest().isInitialized()) {
             
             return false;
           }
@@ -2588,6 +2673,67 @@ public final class SVMPProtocol {
         return this;
       }
 
+      // optional .svmp.FileRequest fileRequest = 17;
+      private org.mitre.svmp.protocol.SVMPProtocol.FileRequest fileRequest_ = org.mitre.svmp.protocol.SVMPProtocol.FileRequest.getDefaultInstance();
+      /**
+       * <code>optional .svmp.FileRequest fileRequest = 17;</code>
+       */
+      public boolean hasFileRequest() {
+        return ((bitField0_ & 0x00002000) == 0x00002000);
+      }
+      /**
+       * <code>optional .svmp.FileRequest fileRequest = 17;</code>
+       */
+      public org.mitre.svmp.protocol.SVMPProtocol.FileRequest getFileRequest() {
+        return fileRequest_;
+      }
+      /**
+       * <code>optional .svmp.FileRequest fileRequest = 17;</code>
+       */
+      public Builder setFileRequest(org.mitre.svmp.protocol.SVMPProtocol.FileRequest value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        fileRequest_ = value;
+
+        bitField0_ |= 0x00002000;
+        return this;
+      }
+      /**
+       * <code>optional .svmp.FileRequest fileRequest = 17;</code>
+       */
+      public Builder setFileRequest(
+          org.mitre.svmp.protocol.SVMPProtocol.FileRequest.Builder builderForValue) {
+        fileRequest_ = builderForValue.build();
+
+        bitField0_ |= 0x00002000;
+        return this;
+      }
+      /**
+       * <code>optional .svmp.FileRequest fileRequest = 17;</code>
+       */
+      public Builder mergeFileRequest(org.mitre.svmp.protocol.SVMPProtocol.FileRequest value) {
+        if (((bitField0_ & 0x00002000) == 0x00002000) &&
+            fileRequest_ != org.mitre.svmp.protocol.SVMPProtocol.FileRequest.getDefaultInstance()) {
+          fileRequest_ =
+            org.mitre.svmp.protocol.SVMPProtocol.FileRequest.newBuilder(fileRequest_).mergeFrom(value).buildPartial();
+        } else {
+          fileRequest_ = value;
+        }
+
+        bitField0_ |= 0x00002000;
+        return this;
+      }
+      /**
+       * <code>optional .svmp.FileRequest fileRequest = 17;</code>
+       */
+      public Builder clearFileRequest() {
+        fileRequest_ = org.mitre.svmp.protocol.SVMPProtocol.FileRequest.getDefaultInstance();
+
+        bitField0_ = (bitField0_ & ~0x00002000);
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:svmp.Request)
     }
 
@@ -2701,6 +2847,16 @@ public final class SVMPProtocol {
      * <code>optional .svmp.WebRTCMessage webrtcMsg = 18;</code>
      */
     org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage getWebrtcMsg();
+
+    // optional .svmp.File file = 19;
+    /**
+     * <code>optional .svmp.File file = 19;</code>
+     */
+    boolean hasFile();
+    /**
+     * <code>optional .svmp.File file = 19;</code>
+     */
+    org.mitre.svmp.protocol.SVMPProtocol.File getFile();
   }
   /**
    * Protobuf type {@code svmp.Response}
@@ -2875,6 +3031,19 @@ public final class SVMPProtocol {
               bitField0_ |= 0x00000200;
               break;
             }
+            case 154: {
+              org.mitre.svmp.protocol.SVMPProtocol.File.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000400) == 0x00000400)) {
+                subBuilder = file_.toBuilder();
+              }
+              file_ = input.readMessage(org.mitre.svmp.protocol.SVMPProtocol.File.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(file_);
+                file_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000400;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -2974,6 +3143,10 @@ public final class SVMPProtocol {
        * </pre>
        */
       APPS(9, 9),
+      /**
+       * <code>FILE = 10;</code>
+       */
+      FILE(10, 10),
       ;
 
       /**
@@ -3044,6 +3217,10 @@ public final class SVMPProtocol {
        * </pre>
        */
       public static final int APPS_VALUE = 9;
+      /**
+       * <code>FILE = 10;</code>
+       */
+      public static final int FILE_VALUE = 10;
 
 
       public final int getNumber() { return value; }
@@ -3060,6 +3237,7 @@ public final class SVMPProtocol {
           case 7: return WEBRTC;
           case 8: return PING;
           case 9: return APPS;
+          case 10: return FILE;
           default: return null;
         }
       }
@@ -3246,6 +3424,22 @@ public final class SVMPProtocol {
       return webrtcMsg_;
     }
 
+    // optional .svmp.File file = 19;
+    public static final int FILE_FIELD_NUMBER = 19;
+    private org.mitre.svmp.protocol.SVMPProtocol.File file_;
+    /**
+     * <code>optional .svmp.File file = 19;</code>
+     */
+    public boolean hasFile() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional .svmp.File file = 19;</code>
+     */
+    public org.mitre.svmp.protocol.SVMPProtocol.File getFile() {
+      return file_;
+    }
+
     private void initFields() {
       type_ = org.mitre.svmp.protocol.SVMPProtocol.Response.ResponseType.ERROR;
       authResponse_ = org.mitre.svmp.protocol.SVMPProtocol.AuthResponse.getDefaultInstance();
@@ -3257,6 +3451,7 @@ public final class SVMPProtocol {
       screenInfo_ = org.mitre.svmp.protocol.SVMPProtocol.ScreenInfo.getDefaultInstance();
       videoInfo_ = org.mitre.svmp.protocol.SVMPProtocol.VideoStreamInfo.getDefaultInstance();
       webrtcMsg_ = org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.getDefaultInstance();
+      file_ = org.mitre.svmp.protocol.SVMPProtocol.File.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3309,6 +3504,12 @@ public final class SVMPProtocol {
           return false;
         }
       }
+      if (hasFile()) {
+        if (!getFile().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -3345,6 +3546,9 @@ public final class SVMPProtocol {
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeMessage(18, webrtcMsg_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeMessage(19, file_);
       }
     }
 
@@ -3393,6 +3597,10 @@ public final class SVMPProtocol {
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(18, webrtcMsg_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(19, file_);
       }
       memoizedSerializedSize = size;
       return size;
@@ -3509,6 +3717,8 @@ public final class SVMPProtocol {
         bitField0_ = (bitField0_ & ~0x00000100);
         webrtcMsg_ = org.mitre.svmp.protocol.SVMPProtocol.WebRTCMessage.getDefaultInstance();
         bitField0_ = (bitField0_ & ~0x00000200);
+        file_ = org.mitre.svmp.protocol.SVMPProtocol.File.getDefaultInstance();
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -3572,6 +3782,10 @@ public final class SVMPProtocol {
           to_bitField0_ |= 0x00000200;
         }
         result.webrtcMsg_ = webrtcMsg_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.file_ = file_;
         result.bitField0_ = to_bitField0_;
         return result;
       }
@@ -3607,6 +3821,9 @@ public final class SVMPProtocol {
         }
         if (other.hasWebrtcMsg()) {
           mergeWebrtcMsg(other.getWebrtcMsg());
+        }
+        if (other.hasFile()) {
+          mergeFile(other.getFile());
         }
         return this;
       }
@@ -3654,6 +3871,12 @@ public final class SVMPProtocol {
         }
         if (hasScreenInfo()) {
           if (!getScreenInfo().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasFile()) {
+          if (!getFile().isInitialized()) {
             
             return false;
           }
@@ -4265,6 +4488,67 @@ public final class SVMPProtocol {
         return this;
       }
 
+      // optional .svmp.File file = 19;
+      private org.mitre.svmp.protocol.SVMPProtocol.File file_ = org.mitre.svmp.protocol.SVMPProtocol.File.getDefaultInstance();
+      /**
+       * <code>optional .svmp.File file = 19;</code>
+       */
+      public boolean hasFile() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional .svmp.File file = 19;</code>
+       */
+      public org.mitre.svmp.protocol.SVMPProtocol.File getFile() {
+        return file_;
+      }
+      /**
+       * <code>optional .svmp.File file = 19;</code>
+       */
+      public Builder setFile(org.mitre.svmp.protocol.SVMPProtocol.File value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        file_ = value;
+
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .svmp.File file = 19;</code>
+       */
+      public Builder setFile(
+          org.mitre.svmp.protocol.SVMPProtocol.File.Builder builderForValue) {
+        file_ = builderForValue.build();
+
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .svmp.File file = 19;</code>
+       */
+      public Builder mergeFile(org.mitre.svmp.protocol.SVMPProtocol.File value) {
+        if (((bitField0_ & 0x00000400) == 0x00000400) &&
+            file_ != org.mitre.svmp.protocol.SVMPProtocol.File.getDefaultInstance()) {
+          file_ =
+            org.mitre.svmp.protocol.SVMPProtocol.File.newBuilder(file_).mergeFrom(value).buildPartial();
+        } else {
+          file_ = value;
+        }
+
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .svmp.File file = 19;</code>
+       */
+      public Builder clearFile() {
+        file_ = org.mitre.svmp.protocol.SVMPProtocol.File.getDefaultInstance();
+
+        bitField0_ = (bitField0_ & ~0x00000400);
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:svmp.Response)
     }
 
@@ -4366,15 +4650,15 @@ public final class SVMPProtocol {
     com.google.protobuf.ByteString
         getTypeBytes();
 
-    // optional .svmp.Intent.File file = 7;
+    // optional .svmp.File file = 7;
     /**
-     * <code>optional .svmp.Intent.File file = 7;</code>
+     * <code>optional .svmp.File file = 7;</code>
      */
     boolean hasFile();
     /**
-     * <code>optional .svmp.Intent.File file = 7;</code>
+     * <code>optional .svmp.File file = 7;</code>
      */
-    org.mitre.svmp.protocol.SVMPProtocol.Intent.File getFile();
+    org.mitre.svmp.protocol.SVMPProtocol.File getFile();
 
     // repeated int32 flags = 4;
     /**
@@ -4514,11 +4798,11 @@ public final class SVMPProtocol {
               break;
             }
             case 58: {
-              org.mitre.svmp.protocol.SVMPProtocol.Intent.File.Builder subBuilder = null;
+              org.mitre.svmp.protocol.SVMPProtocol.File.Builder subBuilder = null;
               if (((bitField0_ & 0x00000008) == 0x00000008)) {
                 subBuilder = file_.toBuilder();
               }
-              file_ = input.readMessage(org.mitre.svmp.protocol.SVMPProtocol.Intent.File.PARSER, extensionRegistry);
+              file_ = input.readMessage(org.mitre.svmp.protocol.SVMPProtocol.File.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(file_);
                 file_ = subBuilder.buildPartial();
@@ -5149,514 +5433,6 @@ public final class SVMPProtocol {
       // @@protoc_insertion_point(class_scope:svmp.Intent.Tuple)
     }
 
-    public interface FileOrBuilder
-        extends com.google.protobuf.MessageLiteOrBuilder {
-
-      // required string filename = 1;
-      /**
-       * <code>required string filename = 1;</code>
-       */
-      boolean hasFilename();
-      /**
-       * <code>required string filename = 1;</code>
-       */
-      java.lang.String getFilename();
-      /**
-       * <code>required string filename = 1;</code>
-       */
-      com.google.protobuf.ByteString
-          getFilenameBytes();
-
-      // optional bytes data = 2;
-      /**
-       * <code>optional bytes data = 2;</code>
-       */
-      boolean hasData();
-      /**
-       * <code>optional bytes data = 2;</code>
-       */
-      com.google.protobuf.ByteString getData();
-    }
-    /**
-     * Protobuf type {@code svmp.Intent.File}
-     *
-     * <pre>
-     * file forwarding
-     * </pre>
-     */
-    public static final class File extends
-        com.google.protobuf.GeneratedMessageLite
-        implements FileOrBuilder {
-      // Use File.newBuilder() to construct.
-      private File(com.google.protobuf.GeneratedMessageLite.Builder builder) {
-        super(builder);
-
-      }
-      private File(boolean noInit) {}
-
-      private static final File defaultInstance;
-      public static File getDefaultInstance() {
-        return defaultInstance;
-      }
-
-      public File getDefaultInstanceForType() {
-        return defaultInstance;
-      }
-
-      private File(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        initFields();
-        int mutable_bitField0_ = 0;
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              default: {
-                if (!parseUnknownField(input,
-                                       extensionRegistry, tag)) {
-                  done = true;
-                }
-                break;
-              }
-              case 10: {
-                bitField0_ |= 0x00000001;
-                filename_ = input.readBytes();
-                break;
-              }
-              case 18: {
-                bitField0_ |= 0x00000002;
-                data_ = input.readBytes();
-                break;
-              }
-            }
-          }
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(this);
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(
-              e.getMessage()).setUnfinishedMessage(this);
-        } finally {
-          makeExtensionsImmutable();
-        }
-      }
-      public static com.google.protobuf.Parser<File> PARSER =
-          new com.google.protobuf.AbstractParser<File>() {
-        public File parsePartialFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return new File(input, extensionRegistry);
-        }
-      };
-
-      @java.lang.Override
-      public com.google.protobuf.Parser<File> getParserForType() {
-        return PARSER;
-      }
-
-      private int bitField0_;
-      // required string filename = 1;
-      public static final int FILENAME_FIELD_NUMBER = 1;
-      private java.lang.Object filename_;
-      /**
-       * <code>required string filename = 1;</code>
-       */
-      public boolean hasFilename() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required string filename = 1;</code>
-       */
-      public java.lang.String getFilename() {
-        java.lang.Object ref = filename_;
-        if (ref instanceof java.lang.String) {
-          return (java.lang.String) ref;
-        } else {
-          com.google.protobuf.ByteString bs = 
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            filename_ = s;
-          }
-          return s;
-        }
-      }
-      /**
-       * <code>required string filename = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getFilenameBytes() {
-        java.lang.Object ref = filename_;
-        if (ref instanceof java.lang.String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          filename_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-
-      // optional bytes data = 2;
-      public static final int DATA_FIELD_NUMBER = 2;
-      private com.google.protobuf.ByteString data_;
-      /**
-       * <code>optional bytes data = 2;</code>
-       */
-      public boolean hasData() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional bytes data = 2;</code>
-       */
-      public com.google.protobuf.ByteString getData() {
-        return data_;
-      }
-
-      private void initFields() {
-        filename_ = "";
-        data_ = com.google.protobuf.ByteString.EMPTY;
-      }
-      private byte memoizedIsInitialized = -1;
-      public final boolean isInitialized() {
-        byte isInitialized = memoizedIsInitialized;
-        if (isInitialized != -1) return isInitialized == 1;
-
-        if (!hasFilename()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-        memoizedIsInitialized = 1;
-        return true;
-      }
-
-      public void writeTo(com.google.protobuf.CodedOutputStream output)
-                          throws java.io.IOException {
-        getSerializedSize();
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          output.writeBytes(1, getFilenameBytes());
-        }
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          output.writeBytes(2, data_);
-        }
-      }
-
-      private int memoizedSerializedSize = -1;
-      public int getSerializedSize() {
-        int size = memoizedSerializedSize;
-        if (size != -1) return size;
-
-        size = 0;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeBytesSize(1, getFilenameBytes());
-        }
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeBytesSize(2, data_);
-        }
-        memoizedSerializedSize = size;
-        return size;
-      }
-
-      private static final long serialVersionUID = 0L;
-      @java.lang.Override
-      protected java.lang.Object writeReplace()
-          throws java.io.ObjectStreamException {
-        return super.writeReplace();
-      }
-
-      public static org.mitre.svmp.protocol.SVMPProtocol.Intent.File parseFrom(
-          com.google.protobuf.ByteString data)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-      }
-      public static org.mitre.svmp.protocol.SVMPProtocol.Intent.File parseFrom(
-          com.google.protobuf.ByteString data,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-      }
-      public static org.mitre.svmp.protocol.SVMPProtocol.Intent.File parseFrom(byte[] data)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-      }
-      public static org.mitre.svmp.protocol.SVMPProtocol.Intent.File parseFrom(
-          byte[] data,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-      }
-      public static org.mitre.svmp.protocol.SVMPProtocol.Intent.File parseFrom(java.io.InputStream input)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input);
-      }
-      public static org.mitre.svmp.protocol.SVMPProtocol.Intent.File parseFrom(
-          java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input, extensionRegistry);
-      }
-      public static org.mitre.svmp.protocol.SVMPProtocol.Intent.File parseDelimitedFrom(java.io.InputStream input)
-          throws java.io.IOException {
-        return PARSER.parseDelimitedFrom(input);
-      }
-      public static org.mitre.svmp.protocol.SVMPProtocol.Intent.File parseDelimitedFrom(
-          java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return PARSER.parseDelimitedFrom(input, extensionRegistry);
-      }
-      public static org.mitre.svmp.protocol.SVMPProtocol.Intent.File parseFrom(
-          com.google.protobuf.CodedInputStream input)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input);
-      }
-      public static org.mitre.svmp.protocol.SVMPProtocol.Intent.File parseFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input, extensionRegistry);
-      }
-
-      public static Builder newBuilder() { return Builder.create(); }
-      public Builder newBuilderForType() { return newBuilder(); }
-      public static Builder newBuilder(org.mitre.svmp.protocol.SVMPProtocol.Intent.File prototype) {
-        return newBuilder().mergeFrom(prototype);
-      }
-      public Builder toBuilder() { return newBuilder(this); }
-
-      /**
-       * Protobuf type {@code svmp.Intent.File}
-       *
-       * <pre>
-       * file forwarding
-       * </pre>
-       */
-      public static final class Builder extends
-          com.google.protobuf.GeneratedMessageLite.Builder<
-            org.mitre.svmp.protocol.SVMPProtocol.Intent.File, Builder>
-          implements org.mitre.svmp.protocol.SVMPProtocol.Intent.FileOrBuilder {
-        // Construct using org.mitre.svmp.protocol.SVMPProtocol.Intent.File.newBuilder()
-        private Builder() {
-          maybeForceBuilderInitialization();
-        }
-
-        private void maybeForceBuilderInitialization() {
-        }
-        private static Builder create() {
-          return new Builder();
-        }
-
-        public Builder clear() {
-          super.clear();
-          filename_ = "";
-          bitField0_ = (bitField0_ & ~0x00000001);
-          data_ = com.google.protobuf.ByteString.EMPTY;
-          bitField0_ = (bitField0_ & ~0x00000002);
-          return this;
-        }
-
-        public Builder clone() {
-          return create().mergeFrom(buildPartial());
-        }
-
-        public org.mitre.svmp.protocol.SVMPProtocol.Intent.File getDefaultInstanceForType() {
-          return org.mitre.svmp.protocol.SVMPProtocol.Intent.File.getDefaultInstance();
-        }
-
-        public org.mitre.svmp.protocol.SVMPProtocol.Intent.File build() {
-          org.mitre.svmp.protocol.SVMPProtocol.Intent.File result = buildPartial();
-          if (!result.isInitialized()) {
-            throw newUninitializedMessageException(result);
-          }
-          return result;
-        }
-
-        public org.mitre.svmp.protocol.SVMPProtocol.Intent.File buildPartial() {
-          org.mitre.svmp.protocol.SVMPProtocol.Intent.File result = new org.mitre.svmp.protocol.SVMPProtocol.Intent.File(this);
-          int from_bitField0_ = bitField0_;
-          int to_bitField0_ = 0;
-          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-            to_bitField0_ |= 0x00000001;
-          }
-          result.filename_ = filename_;
-          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-            to_bitField0_ |= 0x00000002;
-          }
-          result.data_ = data_;
-          result.bitField0_ = to_bitField0_;
-          return result;
-        }
-
-        public Builder mergeFrom(org.mitre.svmp.protocol.SVMPProtocol.Intent.File other) {
-          if (other == org.mitre.svmp.protocol.SVMPProtocol.Intent.File.getDefaultInstance()) return this;
-          if (other.hasFilename()) {
-            bitField0_ |= 0x00000001;
-            filename_ = other.filename_;
-            
-          }
-          if (other.hasData()) {
-            setData(other.getData());
-          }
-          return this;
-        }
-
-        public final boolean isInitialized() {
-          if (!hasFilename()) {
-            
-            return false;
-          }
-          return true;
-        }
-
-        public Builder mergeFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          org.mitre.svmp.protocol.SVMPProtocol.Intent.File parsedMessage = null;
-          try {
-            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-            parsedMessage = (org.mitre.svmp.protocol.SVMPProtocol.Intent.File) e.getUnfinishedMessage();
-            throw e;
-          } finally {
-            if (parsedMessage != null) {
-              mergeFrom(parsedMessage);
-            }
-          }
-          return this;
-        }
-        private int bitField0_;
-
-        // required string filename = 1;
-        private java.lang.Object filename_ = "";
-        /**
-         * <code>required string filename = 1;</code>
-         */
-        public boolean hasFilename() {
-          return ((bitField0_ & 0x00000001) == 0x00000001);
-        }
-        /**
-         * <code>required string filename = 1;</code>
-         */
-        public java.lang.String getFilename() {
-          java.lang.Object ref = filename_;
-          if (!(ref instanceof java.lang.String)) {
-            java.lang.String s = ((com.google.protobuf.ByteString) ref)
-                .toStringUtf8();
-            filename_ = s;
-            return s;
-          } else {
-            return (java.lang.String) ref;
-          }
-        }
-        /**
-         * <code>required string filename = 1;</code>
-         */
-        public com.google.protobuf.ByteString
-            getFilenameBytes() {
-          java.lang.Object ref = filename_;
-          if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8(
-                    (java.lang.String) ref);
-            filename_ = b;
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
-        /**
-         * <code>required string filename = 1;</code>
-         */
-        public Builder setFilename(
-            java.lang.String value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-          filename_ = value;
-          
-          return this;
-        }
-        /**
-         * <code>required string filename = 1;</code>
-         */
-        public Builder clearFilename() {
-          bitField0_ = (bitField0_ & ~0x00000001);
-          filename_ = getDefaultInstance().getFilename();
-          
-          return this;
-        }
-        /**
-         * <code>required string filename = 1;</code>
-         */
-        public Builder setFilenameBytes(
-            com.google.protobuf.ByteString value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-          filename_ = value;
-          
-          return this;
-        }
-
-        // optional bytes data = 2;
-        private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
-        /**
-         * <code>optional bytes data = 2;</code>
-         */
-        public boolean hasData() {
-          return ((bitField0_ & 0x00000002) == 0x00000002);
-        }
-        /**
-         * <code>optional bytes data = 2;</code>
-         */
-        public com.google.protobuf.ByteString getData() {
-          return data_;
-        }
-        /**
-         * <code>optional bytes data = 2;</code>
-         */
-        public Builder setData(com.google.protobuf.ByteString value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-          data_ = value;
-          
-          return this;
-        }
-        /**
-         * <code>optional bytes data = 2;</code>
-         */
-        public Builder clearData() {
-          bitField0_ = (bitField0_ & ~0x00000002);
-          data_ = getDefaultInstance().getData();
-          
-          return this;
-        }
-
-        // @@protoc_insertion_point(builder_scope:svmp.Intent.File)
-      }
-
-      static {
-        defaultInstance = new File(true);
-        defaultInstance.initFields();
-      }
-
-      // @@protoc_insertion_point(class_scope:svmp.Intent.File)
-    }
-
     private int bitField0_;
     // required .svmp.IntentAction action = 1;
     public static final int ACTION_FIELD_NUMBER = 1;
@@ -5836,19 +5612,19 @@ public final class SVMPProtocol {
       }
     }
 
-    // optional .svmp.Intent.File file = 7;
+    // optional .svmp.File file = 7;
     public static final int FILE_FIELD_NUMBER = 7;
-    private org.mitre.svmp.protocol.SVMPProtocol.Intent.File file_;
+    private org.mitre.svmp.protocol.SVMPProtocol.File file_;
     /**
-     * <code>optional .svmp.Intent.File file = 7;</code>
+     * <code>optional .svmp.File file = 7;</code>
      */
     public boolean hasFile() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional .svmp.Intent.File file = 7;</code>
+     * <code>optional .svmp.File file = 7;</code>
      */
-    public org.mitre.svmp.protocol.SVMPProtocol.Intent.File getFile() {
+    public org.mitre.svmp.protocol.SVMPProtocol.File getFile() {
       return file_;
     }
 
@@ -5910,7 +5686,7 @@ public final class SVMPProtocol {
       extras_ = java.util.Collections.emptyList();
       data_ = "";
       type_ = "";
-      file_ = org.mitre.svmp.protocol.SVMPProtocol.Intent.File.getDefaultInstance();
+      file_ = org.mitre.svmp.protocol.SVMPProtocol.File.getDefaultInstance();
       flags_ = java.util.Collections.emptyList();
       categories_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
@@ -6112,7 +5888,7 @@ public final class SVMPProtocol {
         bitField0_ = (bitField0_ & ~0x00000004);
         type_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        file_ = org.mitre.svmp.protocol.SVMPProtocol.Intent.File.getDefaultInstance();
+        file_ = org.mitre.svmp.protocol.SVMPProtocol.File.getDefaultInstance();
         bitField0_ = (bitField0_ & ~0x00000010);
         flags_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -6664,24 +6440,24 @@ public final class SVMPProtocol {
         return this;
       }
 
-      // optional .svmp.Intent.File file = 7;
-      private org.mitre.svmp.protocol.SVMPProtocol.Intent.File file_ = org.mitre.svmp.protocol.SVMPProtocol.Intent.File.getDefaultInstance();
+      // optional .svmp.File file = 7;
+      private org.mitre.svmp.protocol.SVMPProtocol.File file_ = org.mitre.svmp.protocol.SVMPProtocol.File.getDefaultInstance();
       /**
-       * <code>optional .svmp.Intent.File file = 7;</code>
+       * <code>optional .svmp.File file = 7;</code>
        */
       public boolean hasFile() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional .svmp.Intent.File file = 7;</code>
+       * <code>optional .svmp.File file = 7;</code>
        */
-      public org.mitre.svmp.protocol.SVMPProtocol.Intent.File getFile() {
+      public org.mitre.svmp.protocol.SVMPProtocol.File getFile() {
         return file_;
       }
       /**
-       * <code>optional .svmp.Intent.File file = 7;</code>
+       * <code>optional .svmp.File file = 7;</code>
        */
-      public Builder setFile(org.mitre.svmp.protocol.SVMPProtocol.Intent.File value) {
+      public Builder setFile(org.mitre.svmp.protocol.SVMPProtocol.File value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -6691,23 +6467,23 @@ public final class SVMPProtocol {
         return this;
       }
       /**
-       * <code>optional .svmp.Intent.File file = 7;</code>
+       * <code>optional .svmp.File file = 7;</code>
        */
       public Builder setFile(
-          org.mitre.svmp.protocol.SVMPProtocol.Intent.File.Builder builderForValue) {
+          org.mitre.svmp.protocol.SVMPProtocol.File.Builder builderForValue) {
         file_ = builderForValue.build();
 
         bitField0_ |= 0x00000010;
         return this;
       }
       /**
-       * <code>optional .svmp.Intent.File file = 7;</code>
+       * <code>optional .svmp.File file = 7;</code>
        */
-      public Builder mergeFile(org.mitre.svmp.protocol.SVMPProtocol.Intent.File value) {
+      public Builder mergeFile(org.mitre.svmp.protocol.SVMPProtocol.File value) {
         if (((bitField0_ & 0x00000010) == 0x00000010) &&
-            file_ != org.mitre.svmp.protocol.SVMPProtocol.Intent.File.getDefaultInstance()) {
+            file_ != org.mitre.svmp.protocol.SVMPProtocol.File.getDefaultInstance()) {
           file_ =
-            org.mitre.svmp.protocol.SVMPProtocol.Intent.File.newBuilder(file_).mergeFrom(value).buildPartial();
+            org.mitre.svmp.protocol.SVMPProtocol.File.newBuilder(file_).mergeFrom(value).buildPartial();
         } else {
           file_ = value;
         }
@@ -6716,10 +6492,10 @@ public final class SVMPProtocol {
         return this;
       }
       /**
-       * <code>optional .svmp.Intent.File file = 7;</code>
+       * <code>optional .svmp.File file = 7;</code>
        */
       public Builder clearFile() {
-        file_ = org.mitre.svmp.protocol.SVMPProtocol.Intent.File.getDefaultInstance();
+        file_ = org.mitre.svmp.protocol.SVMPProtocol.File.getDefaultInstance();
 
         bitField0_ = (bitField0_ & ~0x00000010);
         return this;
@@ -6893,6 +6669,1078 @@ public final class SVMPProtocol {
     }
 
     // @@protoc_insertion_point(class_scope:svmp.Intent)
+  }
+
+  public interface FileOrBuilder
+      extends com.google.protobuf.MessageLiteOrBuilder {
+
+    // required string filename = 1;
+    /**
+     * <code>required string filename = 1;</code>
+     */
+    boolean hasFilename();
+    /**
+     * <code>required string filename = 1;</code>
+     */
+    java.lang.String getFilename();
+    /**
+     * <code>required string filename = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getFilenameBytes();
+
+    // optional bytes data = 2;
+    /**
+     * <code>optional bytes data = 2;</code>
+     */
+    boolean hasData();
+    /**
+     * <code>optional bytes data = 2;</code>
+     */
+    com.google.protobuf.ByteString getData();
+
+    // optional string targetPath = 3;
+    /**
+     * <code>optional string targetPath = 3;</code>
+     */
+    boolean hasTargetPath();
+    /**
+     * <code>optional string targetPath = 3;</code>
+     */
+    java.lang.String getTargetPath();
+    /**
+     * <code>optional string targetPath = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getTargetPathBytes();
+  }
+  /**
+   * Protobuf type {@code svmp.File}
+   */
+  public static final class File extends
+      com.google.protobuf.GeneratedMessageLite
+      implements FileOrBuilder {
+    // Use File.newBuilder() to construct.
+    private File(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+
+    }
+    private File(boolean noInit) {}
+
+    private static final File defaultInstance;
+    public static File getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public File getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private File(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              filename_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              data_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              targetPath_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<File> PARSER =
+        new com.google.protobuf.AbstractParser<File>() {
+      public File parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new File(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<File> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required string filename = 1;
+    public static final int FILENAME_FIELD_NUMBER = 1;
+    private java.lang.Object filename_;
+    /**
+     * <code>required string filename = 1;</code>
+     */
+    public boolean hasFilename() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string filename = 1;</code>
+     */
+    public java.lang.String getFilename() {
+      java.lang.Object ref = filename_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          filename_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string filename = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getFilenameBytes() {
+      java.lang.Object ref = filename_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        filename_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional bytes data = 2;
+    public static final int DATA_FIELD_NUMBER = 2;
+    private com.google.protobuf.ByteString data_;
+    /**
+     * <code>optional bytes data = 2;</code>
+     */
+    public boolean hasData() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional bytes data = 2;</code>
+     */
+    public com.google.protobuf.ByteString getData() {
+      return data_;
+    }
+
+    // optional string targetPath = 3;
+    public static final int TARGETPATH_FIELD_NUMBER = 3;
+    private java.lang.Object targetPath_;
+    /**
+     * <code>optional string targetPath = 3;</code>
+     */
+    public boolean hasTargetPath() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string targetPath = 3;</code>
+     */
+    public java.lang.String getTargetPath() {
+      java.lang.Object ref = targetPath_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          targetPath_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string targetPath = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTargetPathBytes() {
+      java.lang.Object ref = targetPath_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        targetPath_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      filename_ = "";
+      data_ = com.google.protobuf.ByteString.EMPTY;
+      targetPath_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasFilename()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getFilenameBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, data_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getTargetPathBytes());
+      }
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getFilenameBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, data_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getTargetPathBytes());
+      }
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static org.mitre.svmp.protocol.SVMPProtocol.File parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.mitre.svmp.protocol.SVMPProtocol.File parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.mitre.svmp.protocol.SVMPProtocol.File parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.mitre.svmp.protocol.SVMPProtocol.File parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.mitre.svmp.protocol.SVMPProtocol.File parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.mitre.svmp.protocol.SVMPProtocol.File parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static org.mitre.svmp.protocol.SVMPProtocol.File parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static org.mitre.svmp.protocol.SVMPProtocol.File parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static org.mitre.svmp.protocol.SVMPProtocol.File parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.mitre.svmp.protocol.SVMPProtocol.File parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.mitre.svmp.protocol.SVMPProtocol.File prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code svmp.File}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          org.mitre.svmp.protocol.SVMPProtocol.File, Builder>
+        implements org.mitre.svmp.protocol.SVMPProtocol.FileOrBuilder {
+      // Construct using org.mitre.svmp.protocol.SVMPProtocol.File.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        filename_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        data_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        targetPath_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public org.mitre.svmp.protocol.SVMPProtocol.File getDefaultInstanceForType() {
+        return org.mitre.svmp.protocol.SVMPProtocol.File.getDefaultInstance();
+      }
+
+      public org.mitre.svmp.protocol.SVMPProtocol.File build() {
+        org.mitre.svmp.protocol.SVMPProtocol.File result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public org.mitre.svmp.protocol.SVMPProtocol.File buildPartial() {
+        org.mitre.svmp.protocol.SVMPProtocol.File result = new org.mitre.svmp.protocol.SVMPProtocol.File(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.filename_ = filename_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.data_ = data_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.targetPath_ = targetPath_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(org.mitre.svmp.protocol.SVMPProtocol.File other) {
+        if (other == org.mitre.svmp.protocol.SVMPProtocol.File.getDefaultInstance()) return this;
+        if (other.hasFilename()) {
+          bitField0_ |= 0x00000001;
+          filename_ = other.filename_;
+          
+        }
+        if (other.hasData()) {
+          setData(other.getData());
+        }
+        if (other.hasTargetPath()) {
+          bitField0_ |= 0x00000004;
+          targetPath_ = other.targetPath_;
+          
+        }
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasFilename()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.mitre.svmp.protocol.SVMPProtocol.File parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.mitre.svmp.protocol.SVMPProtocol.File) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required string filename = 1;
+      private java.lang.Object filename_ = "";
+      /**
+       * <code>required string filename = 1;</code>
+       */
+      public boolean hasFilename() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string filename = 1;</code>
+       */
+      public java.lang.String getFilename() {
+        java.lang.Object ref = filename_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          filename_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string filename = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getFilenameBytes() {
+        java.lang.Object ref = filename_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          filename_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string filename = 1;</code>
+       */
+      public Builder setFilename(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        filename_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string filename = 1;</code>
+       */
+      public Builder clearFilename() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        filename_ = getDefaultInstance().getFilename();
+        
+        return this;
+      }
+      /**
+       * <code>required string filename = 1;</code>
+       */
+      public Builder setFilenameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        filename_ = value;
+        
+        return this;
+      }
+
+      // optional bytes data = 2;
+      private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes data = 2;</code>
+       */
+      public boolean hasData() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional bytes data = 2;</code>
+       */
+      public com.google.protobuf.ByteString getData() {
+        return data_;
+      }
+      /**
+       * <code>optional bytes data = 2;</code>
+       */
+      public Builder setData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        data_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional bytes data = 2;</code>
+       */
+      public Builder clearData() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        data_ = getDefaultInstance().getData();
+        
+        return this;
+      }
+
+      // optional string targetPath = 3;
+      private java.lang.Object targetPath_ = "";
+      /**
+       * <code>optional string targetPath = 3;</code>
+       */
+      public boolean hasTargetPath() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string targetPath = 3;</code>
+       */
+      public java.lang.String getTargetPath() {
+        java.lang.Object ref = targetPath_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          targetPath_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string targetPath = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTargetPathBytes() {
+        java.lang.Object ref = targetPath_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          targetPath_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string targetPath = 3;</code>
+       */
+      public Builder setTargetPath(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        targetPath_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>optional string targetPath = 3;</code>
+       */
+      public Builder clearTargetPath() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        targetPath_ = getDefaultInstance().getTargetPath();
+        
+        return this;
+      }
+      /**
+       * <code>optional string targetPath = 3;</code>
+       */
+      public Builder setTargetPathBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        targetPath_ = value;
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:svmp.File)
+    }
+
+    static {
+      defaultInstance = new File(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:svmp.File)
+  }
+
+  public interface FileRequestOrBuilder
+      extends com.google.protobuf.MessageLiteOrBuilder {
+
+    // required string filename = 1;
+    /**
+     * <code>required string filename = 1;</code>
+     */
+    boolean hasFilename();
+    /**
+     * <code>required string filename = 1;</code>
+     */
+    java.lang.String getFilename();
+    /**
+     * <code>required string filename = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getFilenameBytes();
+  }
+  /**
+   * Protobuf type {@code svmp.FileRequest}
+   */
+  public static final class FileRequest extends
+      com.google.protobuf.GeneratedMessageLite
+      implements FileRequestOrBuilder {
+    // Use FileRequest.newBuilder() to construct.
+    private FileRequest(com.google.protobuf.GeneratedMessageLite.Builder builder) {
+      super(builder);
+
+    }
+    private FileRequest(boolean noInit) {}
+
+    private static final FileRequest defaultInstance;
+    public static FileRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public FileRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private FileRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              filename_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static com.google.protobuf.Parser<FileRequest> PARSER =
+        new com.google.protobuf.AbstractParser<FileRequest>() {
+      public FileRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new FileRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FileRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required string filename = 1;
+    public static final int FILENAME_FIELD_NUMBER = 1;
+    private java.lang.Object filename_;
+    /**
+     * <code>required string filename = 1;</code>
+     */
+    public boolean hasFilename() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string filename = 1;</code>
+     */
+    public java.lang.String getFilename() {
+      java.lang.Object ref = filename_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          filename_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string filename = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getFilenameBytes() {
+      java.lang.Object ref = filename_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        filename_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      filename_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasFilename()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getFilenameBytes());
+      }
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getFilenameBytes());
+      }
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static org.mitre.svmp.protocol.SVMPProtocol.FileRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.mitre.svmp.protocol.SVMPProtocol.FileRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.mitre.svmp.protocol.SVMPProtocol.FileRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.mitre.svmp.protocol.SVMPProtocol.FileRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.mitre.svmp.protocol.SVMPProtocol.FileRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.mitre.svmp.protocol.SVMPProtocol.FileRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static org.mitre.svmp.protocol.SVMPProtocol.FileRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static org.mitre.svmp.protocol.SVMPProtocol.FileRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static org.mitre.svmp.protocol.SVMPProtocol.FileRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.mitre.svmp.protocol.SVMPProtocol.FileRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.mitre.svmp.protocol.SVMPProtocol.FileRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    /**
+     * Protobuf type {@code svmp.FileRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          org.mitre.svmp.protocol.SVMPProtocol.FileRequest, Builder>
+        implements org.mitre.svmp.protocol.SVMPProtocol.FileRequestOrBuilder {
+      // Construct using org.mitre.svmp.protocol.SVMPProtocol.FileRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private void maybeForceBuilderInitialization() {
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        filename_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public org.mitre.svmp.protocol.SVMPProtocol.FileRequest getDefaultInstanceForType() {
+        return org.mitre.svmp.protocol.SVMPProtocol.FileRequest.getDefaultInstance();
+      }
+
+      public org.mitre.svmp.protocol.SVMPProtocol.FileRequest build() {
+        org.mitre.svmp.protocol.SVMPProtocol.FileRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public org.mitre.svmp.protocol.SVMPProtocol.FileRequest buildPartial() {
+        org.mitre.svmp.protocol.SVMPProtocol.FileRequest result = new org.mitre.svmp.protocol.SVMPProtocol.FileRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.filename_ = filename_;
+        result.bitField0_ = to_bitField0_;
+        return result;
+      }
+
+      public Builder mergeFrom(org.mitre.svmp.protocol.SVMPProtocol.FileRequest other) {
+        if (other == org.mitre.svmp.protocol.SVMPProtocol.FileRequest.getDefaultInstance()) return this;
+        if (other.hasFilename()) {
+          bitField0_ |= 0x00000001;
+          filename_ = other.filename_;
+          
+        }
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasFilename()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.mitre.svmp.protocol.SVMPProtocol.FileRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.mitre.svmp.protocol.SVMPProtocol.FileRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required string filename = 1;
+      private java.lang.Object filename_ = "";
+      /**
+       * <code>required string filename = 1;</code>
+       */
+      public boolean hasFilename() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string filename = 1;</code>
+       */
+      public java.lang.String getFilename() {
+        java.lang.Object ref = filename_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          filename_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string filename = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getFilenameBytes() {
+        java.lang.Object ref = filename_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          filename_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string filename = 1;</code>
+       */
+      public Builder setFilename(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        filename_ = value;
+        
+        return this;
+      }
+      /**
+       * <code>required string filename = 1;</code>
+       */
+      public Builder clearFilename() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        filename_ = getDefaultInstance().getFilename();
+        
+        return this;
+      }
+      /**
+       * <code>required string filename = 1;</code>
+       */
+      public Builder setFilenameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        filename_ = value;
+        
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:svmp.FileRequest)
+    }
+
+    static {
+      defaultInstance = new FileRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:svmp.FileRequest)
   }
 
   public interface NotificationOrBuilder
