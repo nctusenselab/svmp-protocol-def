@@ -21,6 +21,10 @@ public final class SVMPProtocol {
      * <code>ACTION_DIAL = 2;</code>
      */
     ACTION_DIAL(1, 2),
+    /**
+     * <code>ACTION_SEND = 3;</code>
+     */
+    ACTION_SEND(2, 3),
     ;
 
     /**
@@ -31,6 +35,10 @@ public final class SVMPProtocol {
      * <code>ACTION_DIAL = 2;</code>
      */
     public static final int ACTION_DIAL_VALUE = 2;
+    /**
+     * <code>ACTION_SEND = 3;</code>
+     */
+    public static final int ACTION_SEND_VALUE = 3;
 
 
     public final int getNumber() { return value; }
@@ -39,6 +47,7 @@ public final class SVMPProtocol {
       switch (value) {
         case 1: return ACTION_VIEW;
         case 2: return ACTION_DIAL;
+        case 3: return ACTION_SEND;
         default: return null;
       }
     }

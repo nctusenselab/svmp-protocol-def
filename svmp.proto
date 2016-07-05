@@ -102,6 +102,7 @@ enum IntentAction
 {
   ACTION_VIEW = 1;
   ACTION_DIAL = 2;
+  ACTION_SEND = 3;
 }
 
 // C<->S
